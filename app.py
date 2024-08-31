@@ -40,6 +40,7 @@ def main():
     
     if "conversation_started" not in st.session_state:
         st.session_state.conversation_started = False
+        st.session_state.stage = "greeting"  # Set initial stage
     
     if not st.session_state.conversation_started:
         st.session_state.conversation_started = True
@@ -49,19 +50,32 @@ def main():
     st.write(f"User input received: {user_input}")  # Debug statement
     
     if user_input:
-        if "conversation practice" in user_input.lower():
-            st.write("Great! Let's start with a conversation practice session.")
-            st.write("You can talk about any topic you want, and then I'll guide you through it, giving feedback along the way.")
+        if st.session_state.stage == "greeting" and user_input.lower() == "hi":
+            st.write("Hi, how can I help you?")
+            st.session_state.stage = "options"
+        
+        elif st.session_state.stage == "options":
+            if "english speaking practice" in user_input.lower():
+                st.write("I would be happy to help you with the following options: conversation practice, pronunciation, vocabulary.")
+                st.session_state.stage = "choose_option"
+        
+        elif st.session_state.stage == "choose_option":
+            if "conversation practice" in user_input.lower():
+                st.write("Great! Let's start with a conversation practice session.")
+                st.write("You can talk about any topic you want, and then I'll guide you through it, giving feedback along the way.")
+                st.session_state.stage = "record_audio"
+        
+        elif st.session_state.stage == "record_audio":
             audio = record_audio()
             if audio is not None:
                 text = transcribe_audio(audio)
                 st.write(f"You said: {text}")
                 feedback = generate_feedback(text)
                 st.write(f"Feedback: {feedback}")
-            else:
-                st.write("No audio file was uploaded.")
+                st.session_state.stage = "feedback"
+
         else:
-            st.write("Please type 'conversation practice' to start.")
+            st.write("Please type 'hi' to start.")
 
 # Directly calling the main function
 main()
