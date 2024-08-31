@@ -8,7 +8,7 @@ from pydub.playback import play
 # Load the Whisper model
 model = whisper.load_model("base")
 
-# Function to handle audio input (alternative method)
+# Function to handle audio input
 def record_audio():
     audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3", "ogg"])
     if audio_file is not None:
@@ -46,11 +46,10 @@ def main():
         st.session_state.conversation_started = True
         st.write("Welcome to the English Speaking Practice Bot!")
     
-    user_input = st.text_input("Type here to start the conversation: ", "")
-    st.write(f"User input received: {user_input}")  # Debug statement
+    user_input = st.text_input("Type here to start the conversation: ", key="input_field")
     
     if user_input:
-        if st.session_state.stage == "greeting" and user_input.lower() == "hi":
+        if st.session_state.stage == "greeting" and user_input.strip().lower() == "hi":
             st.write("Hi, how can I help you?")
             st.session_state.stage = "options"
         
@@ -76,6 +75,9 @@ def main():
 
         else:
             st.write("Please type 'hi' to start.")
+        
+        # Clear the input field after processing
+        st.session_state["input_field"] = ""
 
 # Directly calling the main function
 main()
