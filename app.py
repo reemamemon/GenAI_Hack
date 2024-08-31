@@ -50,7 +50,7 @@ def main():
         user_input = st.text_input("Type here to start the conversation:", key="input_field")
 
         if user_input:
-            if st.session_state.stage == "greeting" and user_input.strip().lower() == "hi":
+            if st.session_state.stage == "greeting":
                 st.write("Hi, how can I help you?")
                 st.session_state.stage = "options"
             
