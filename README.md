@@ -26,7 +26,7 @@ Check out the live demo of Project [here]().
 
 ## Installation
 
-To install Quranic, follow these steps:
+To install , follow these steps:
 
 1. Clone the repository:
 
@@ -45,6 +45,15 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
+
+## Usage
+Once the application is running, you can access the bot via your web browser. Use the interface to start conversations, practice pronunciation, and enhance your vocabulary with the provided features.
+
+## Contributors
+
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 
 
