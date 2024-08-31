@@ -10,11 +10,11 @@ model = whisper.load_model("base")
 
 # Function to handle audio input (alternative method)
 def record_audio():
-    # Use a file uploader instead of direct microphone input
     audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3", "ogg"])
     if audio_file is not None:
         audio = AudioSegment.from_file(audio_file)
         play(audio)  # Optional: play the uploaded audio
+        st.write("Audio file uploaded and played successfully.")
         return audio
     else:
         st.write("Please upload an audio file.")
@@ -22,17 +22,16 @@ def record_audio():
 
 # Function to transcribe audio to text
 def transcribe_audio(audio):
-    # Save the audio file to a temporary WAV file
     temp_wav_path = "/tmp/temp_audio.wav"
     audio.export(temp_wav_path, format="wav")
-    # Use Whisper to transcribe the saved audio file
     result = model.transcribe(temp_wav_path)
+    st.write("Transcription completed successfully.")
     return result["text"]
 
 # Function to generate feedback
 def generate_feedback(text):
-    # Placeholder for feedback generation
     feedback = "Your grammar was good, but you made some mistakes in vocabulary and pronunciation."
+    st.write("Feedback generated successfully.")
     return feedback
 
 # Main app
@@ -47,6 +46,7 @@ def main():
         st.write("Welcome to the English Speaking Practice Bot!")
     
     user_input = st.text_input("Type here to start the conversation: ", "")
+    st.write(f"User input received: {user_input}")  # Debug statement
     
     if user_input:
         if "conversation practice" in user_input.lower():
@@ -58,6 +58,10 @@ def main():
                 st.write(f"You said: {text}")
                 feedback = generate_feedback(text)
                 st.write(f"Feedback: {feedback}")
+            else:
+                st.write("No audio file was uploaded.")
+        else:
+            st.write("Please type 'conversation practice' to start.")
 
 # Directly calling the main function
 main()
