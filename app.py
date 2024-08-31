@@ -1,28 +1,35 @@
 import streamlit as st
 import whisper
 import speech_recognition as sr
+import soundfile as sf
+from pydub import AudioSegment
+from pydub.playback import play
 
 # Load the Whisper model
 model = whisper.load_model("base")
 
-# Initialize the recognizer
-recognizer = sr.Recognizer()
-
-# Function to record audio
+# Function to handle audio input (alternative method)
 def record_audio():
-    with sr.Microphone() as source:
-        st.write("Recording... Please speak into the microphone.")
-        audio = recognizer.listen(source)
-        st.write("Recording finished.")
-    return audio
+    # Use a file uploader instead of direct microphone input
+    audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3", "ogg"])
+    if audio_file is not None:
+        audio = AudioSegment.from_file(audio_file)
+        play(audio)  # Optional: play the uploaded audio
+        return audio
+    else:
+        st.write("Please upload an audio file.")
+    return None
 
 # Function to transcribe audio to text
 def transcribe_audio(audio):
-    # Convert speech to text using Whisper model
-    text = recognizer.recognize_google(audio)
-    return text
+    # Save the audio file to a temporary WAV file
+    temp_wav_path = "/tmp/temp_audio.wav"
+    audio.export(temp_wav_path, format="wav")
+    # Use Whisper to transcribe the saved audio file
+    result = model.transcribe(temp_wav_path)
+    return result["text"]
 
-# Function to generate feedback (This can be a simple function for now)
+# Function to generate feedback
 def generate_feedback(text):
     # Placeholder for feedback generation
     feedback = "Your grammar was good, but you made some mistakes in vocabulary and pronunciation."
@@ -45,8 +52,8 @@ def main():
         if "conversation practice" in user_input.lower():
             st.write("Great! Let's start with a conversation practice session.")
             st.write("You can talk about any topic you want, and then I'll guide you through it, giving feedback along the way.")
-            if st.button("Start Recording"):
-                audio = record_audio()
+            audio = record_audio()
+            if audio is not None:
                 text = transcribe_audio(audio)
                 st.write(f"You said: {text}")
                 feedback = generate_feedback(text)
