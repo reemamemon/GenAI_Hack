@@ -59,5 +59,5 @@ def main():
                 feedback = generate_feedback(text)
                 st.write(f"Feedback: {feedback}")
 
-if _name_ == "_main_":
-    main()
+# Directly calling the main function
+main()
