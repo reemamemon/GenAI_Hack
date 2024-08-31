@@ -9,16 +9,16 @@ Check out the live demo of Project [here]().
 ## Key Features
 
 **1. Conversation Practice:** 
- -Engage in voice-based conversations with the bot. 
- -Receive instant feedback on fluency, grammar, and pronunciation.
+ - Engage in voice-based conversations with the bot. 
+ - Receive instant feedback on fluency, grammar, and pronunciation.
 
 **2. Pronunciation Assistance:**
- -Input any word or sentence.
- -The bot accurately pronounces the input, helping users refine their speaking skills.
+ - Input any word or sentence.
+ - The bot accurately pronounces the input, helping users refine their speaking skills.
 
 **3. Vocabulary Enhancement:**
- -Provide a word to the bot.
- -The bot returns synonyms and their meanings in Urdu, aiding vocabulary growth.
+ - Provide a word to the bot.
+ - The bot returns synonyms and their meanings in Urdu, aiding vocabulary growth.
 
 ## Technologies Used
 
