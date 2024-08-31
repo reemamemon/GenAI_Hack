@@ -58,6 +58,6 @@ def main():
                 st.write(f"You said: {text}")
                 feedback = generate_feedback(text)
                 st.write(f"Feedback: {feedback}")
-        
+
 if _name_ == "_main_":
     main()
