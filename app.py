@@ -1,6 +1,5 @@
 import streamlit as st
 import whisper
-import speech_recognition as sr
 import soundfile as sf
 from pydub import AudioSegment
 from pydub.playback import play
@@ -46,38 +45,37 @@ def main():
         st.session_state.conversation_started = True
         st.write("Welcome to the English Speaking Practice Bot!")
     
-    user_input = st.text_input("Type here to start the conversation: ", key="input_field")
-    
-    if user_input:
-        if st.session_state.stage == "greeting" and user_input.strip().lower() == "hi":
-            st.write("Hi, how can I help you?")
-            st.session_state.stage = "options"
-        
-        elif st.session_state.stage == "options":
-            if "english speaking practice" in user_input.lower():
-                st.write("I would be happy to help you with the following options: conversation practice, pronunciation, vocabulary.")
-                st.session_state.stage = "choose_option"
-        
-        elif st.session_state.stage == "choose_option":
-            if "conversation practice" in user_input.lower():
-                st.write("Great! Let's start with a conversation practice session.")
-                st.write("You can talk about any topic you want, and then I'll guide you through it, giving feedback along the way.")
-                st.session_state.stage = "record_audio"
-        
-        elif st.session_state.stage == "record_audio":
-            audio = record_audio()
-            if audio is not None:
-                text = transcribe_audio(audio)
-                st.write(f"You said: {text}")
-                feedback = generate_feedback(text)
-                st.write(f"Feedback: {feedback}")
-                st.session_state.stage = "feedback"
+    # Only show text input if we are not at the record_audio stage
+    if st.session_state.stage != "record_audio":
+        user_input = st.text_input("Type here to start the conversation:", key="input_field")
 
-        else:
-            st.write("Please type 'hi' to start.")
-        
-        # Clear the input field after processing
-        st.session_state["input_field"] = ""
+        if user_input:
+            if st.session_state.stage == "greeting" and user_input.strip().lower() == "hi":
+                st.write("Hi, how can I help you?")
+                st.session_state.stage = "options"
+            
+            elif st.session_state.stage == "options":
+                if "english speaking practice" in user_input.lower():
+                    st.write("I would be happy to help you with the following options: conversation practice, pronunciation, vocabulary.")
+                    st.session_state.stage = "choose_option"
+            
+            elif st.session_state.stage == "choose_option":
+                if "conversation practice" in user_input.lower():
+                    st.write("Great! Let's start with a conversation practice session.")
+                    st.write("You can talk about any topic you want, and then I'll guide you through it, giving feedback along the way.")
+                    st.session_state.stage = "record_audio"
+
+            # Clear the input field after processing
+            st.experimental_rerun()
+
+    if st.session_state.stage == "record_audio":
+        audio = record_audio()
+        if audio is not None:
+            text = transcribe_audio(audio)
+            st.write(f"You said: {text}")
+            feedback = generate_feedback(text)
+            st.write(f"Feedback: {feedback}")
+            st.session_state.stage = "feedback"
 
 # Directly calling the main function
 main()
