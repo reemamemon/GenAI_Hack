@@ -1,5 +1,0 @@
-streamlit==1.26.0
-openai-whisper==20230314
-SpeechRecognition==3.8.1
-soundfile==0.12.1
-pydub==0.25.1
