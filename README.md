@@ -22,6 +22,26 @@ Check out the live demo of Project [here](https://huggingface.co/spaces/alidotde
 
 ## Technologies Used
 
+The following technologies are used in the code:
+
+1. **Gradio**: For building the user interface with tabs for different functionalities like pronunciation help, conversation practice, and synonym finder.
+   
+2. **Groq**: For using the Groq API to interact with the language model.
+   
+3. **NumPy**: For numerical operations, particularly to handle audio data.
+   
+4. **OpenAI Whisper**: For speech-to-text conversion, helping transcribe audio input into text.
+   
+5. **gTTS (Google Text-to-Speech)**: For converting text input into speech and generating audio output.
+   
+6. **Librosa**: For loading and processing audio files, particularly for extracting audio data for analysis.
+   
+7. **NLTK (Natural Language Toolkit)**: For working with the WordNet lexical database to find synonyms.
+   
+8. **Deep-Translator**: For translating English synonyms into Urdu.
+
+These libraries and tools enable the functionalities of speech-to-text, text-to-speech, chatbot interaction, and translation within the bot.
+
 ## Future Work
 
 ## Installation
