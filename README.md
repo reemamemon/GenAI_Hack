@@ -60,7 +60,7 @@ To install , follow these steps:
 1. Clone the repository:
 
 ```
-git clone []()
+git clone [https://github.com/reemamemon/SpeakBuddy.git](https://github.com/reemamemon/SpeakBuddy)
 ```
 
 2. Install dependencies:
