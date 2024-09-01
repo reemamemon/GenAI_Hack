@@ -44,6 +44,15 @@ These libraries and tools enable the functionalities of speech-to-text, text-to-
 
 ## Future Work
 
+**1. RAG-Based Vocabulary:** Integrating reputable dictionaries like Oxford and  Cambridge into a Retrieval-Augmented 
+ Generation (RAG) system will enhance vocabulary definitions, providing more accurate and comprehensive meanings.
+
+**2. Multilingual Support:** Expanding vocabulary features to support meanings in multiple languages beyond Urdu will make SpeakBuddy more accessible to a diverse user base.
+
+**3. Interactive Learning Modules:** Introducing interactive modules such as quizzes, challenges, and interactive scenarios will make learning more engaging and effective, promoting active participation.
+
+**4. Mobile Integration:** Developing a mobile app version will enhance accessibility, allowing learners to access SpeakBuddy anytime and anywhere, fostering continuous learning.
+
 ## Installation
 
 To install , follow these steps:
