@@ -4,7 +4,7 @@ The AI-Based English Speaking Practice Bot is designed to assist non-native Engl
 
 ## Live Demo
 
-Check out the live demo of Project [here]().
+Check out the live demo of Project [here](https://huggingface.co/spaces/alidotdev/Speak_buddy).
 
 ## Key Features
 
