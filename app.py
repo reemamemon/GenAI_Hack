@@ -4,20 +4,27 @@ import whisper
 from groq import Groq
 import numpy as np
 import librosa
+import nltk
 from nltk.corpus import wordnet
 from deep_translator import GoogleTranslator
 
+# Ensure wordnet data is downloaded
+nltk.download('wordnet')
+
 # Set up Groq API client
-client = Groq(api_key="Your_API_Key")
+client = Groq(api_key="enter you groq api key heres")
 
 # Load Whisper model
 model = whisper.load_model("base")
 
 def text_to_speech(text):
-    tts = gTTS(text=text, lang='en')
-    audio_file_path = "output.mp3"
-    tts.save(audio_file_path)
-    return audio_file_path
+    try:
+        tts = gTTS(text=text, lang='en')
+        audio_file_path = "output.mp3"
+        tts.save(audio_file_path)
+        return audio_file_path
+    except Exception as e:
+        return f"Error in TTS: {str(e)}"
 
 def chatbot(audio):
     try:
@@ -45,7 +52,7 @@ def chatbot(audio):
 
         return response_text
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"Error in chatbot: {str(e)}"
 
 def get_synonyms(word):
     try:
@@ -61,7 +68,7 @@ def get_synonyms(word):
 
         return f"English Synonyms: {', '.join(english_synonyms)}", f"Urdu Synonyms: {', '.join(urdu_synonyms)}"
     except Exception as e:
-        return f"An error occurred: {e}", ""
+        return f"Error in synonym finder: {str(e)}", ""
 
 def build_interface():
     with gr.Blocks() as demo:
@@ -77,7 +84,6 @@ def build_interface():
                 gr.Markdown(
                     """
                     <h2 style="text-align: center; color: #4CAF50;">Pronounciation Helper</h2>
-
                     """
                 )
                 text_input = gr.Textbox(label="Enter your text here", lines=3, placeholder="Type your text here...")
@@ -90,7 +96,6 @@ def build_interface():
                 gr.Markdown(
                     """
                     <h2 style="text-align: center; color: #4CAF50;">Conversation Helper</h2>
-
                     """
                 )
                 audio_input = gr.Audio(type="filepath", label="Record Your Voice")
@@ -102,7 +107,6 @@ def build_interface():
                 gr.Markdown(
                     """
                     <h2 style="text-align: center; color: #4CAF50;">Synonym Finder</h2>
-
                     """
                 )
                 word_input = gr.Textbox(label="Enter a word", lines=1, placeholder="Type a word here...")
